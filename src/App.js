@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 // Uncomment untuk memuat daftar kontak
 import contactsJSON from "./data/contacts.json";
 import Header from "./components/Header";
+import { Grid, List } from "@mui/material";
+import ContactForm from "./components/ContactForm";
 const App = () => {
   const [contacts, setContacts] = useState(contactsJSON);
   // Masukkan Header dan lakukan map untuk Contact ke dalam div App
@@ -20,7 +22,18 @@ const App = () => {
   return (
     <div className="App">
       <Header />
-      <Contact contacts={contacts} addContact={addContact} />
+      <Grid container spacing={2} sx={{ marginTop: "2rem" }}>
+        <Grid item xs={5}>
+          <ContactForm addContact={addContact} />
+        </Grid>
+        <Grid item xs={7}>
+          <List sx={{ margin: "0 5rem", background: "#dbf6f0" }}>
+            {contacts.map((el) => {
+              return <Contact data={el} />;
+            })}
+          </List>
+        </Grid>
+      </Grid>
     </div>
   );
 };
